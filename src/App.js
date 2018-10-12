@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import MovieCard from './MovieCard.js';
 
 class App extends Component {
   state = {
@@ -13,7 +14,7 @@ class App extends Component {
     // go get data from the movies API
     axios.get(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=b6fbc7f3f313bd395902af464ef47262`)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         const movies = res.data.results;
         this.setState({ movies });
       })
@@ -28,9 +29,7 @@ class App extends Component {
           <p>
             Hello, world!
           </p>
-          <ul>
-            { this.state.movies.map(movie => <li key={movie.id}>{movie.title}</li>) }
-          </ul>
+          { this.state.movies.map(movie => <MovieCard movie={movie} key={movie.id} />) }
           <a
             className="App-link"
             href="https://reactjs.org"
